@@ -1,0 +1,370 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    overflow: hidden; 
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Takvim Alanı */
+.calendar-section {
+    flex: 3;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.calendar-header {
+    margin-bottom: 20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-top h2 {
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#weekRangeDisplay {
+    font-size: 16px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* Hafta Navigasyon Butonları & Seçici */
+.week-nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-nav {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+.btn-nav:hover {
+    background-color: #ecf0f1;
+}
+
+#todayBtn {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+#todayBtn:hover {
+    background-color: #2980b9;
+}
+
+/* Tarih Seçici Özel Tasarım */
+.week-picker {
+    outline: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(6, minmax(140px, 1fr));
+    gap: 1px;
+    background-color: #bdc3c7; 
+    border: 1px solid #bdc3c7; 
+    border-radius: 6px;
+    overflow-x: auto; 
+    overflow-y: auto; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.grid-cell {
+    background-color: #fff;
+    min-height: 80px; 
+    font-size: 14px;
+}
+
+.grid-header {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 10; 
+}
+
+.grid-header.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.grid-header.clickable:hover {
+    background-color: #2980b9; 
+}
+
+.time-label {
+    background-color: #ecf0f1;
+    font-weight: bold;
+    text-align: center;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: sticky;
+    left: 0;
+    z-index: 5; 
+}
+
+.time-slot {
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: transparent; 
+}
+
+.half-hour {
+    flex: 1; 
+    width: 100%;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px; 
+    align-items: flex-start;
+    align-content: flex-start;
+    background-color: #fff !important; 
+}
+
+.half-hour:hover {
+    background-color: #e8f4f8 !important; 
+}
+
+.half-hour:first-child {
+    border-bottom: 1px dashed #bdc3c7; 
+}
+
+.appointment-card {
+    background-color: #2ecc71; 
+    color: white;
+    padding: 4px 8px; 
+    border-radius: 4px;
+    font-size: 11px;
+    max-width: 100%; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.appointment-card:hover {
+    background-color: #27ae60; 
+}
+
+/* Sağ Panel */
+.right-panel {
+    flex: 1;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.05);
+    overflow-y: auto; 
+    height: 100vh;
+}
+
+.right-panel h3 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db; 
+    padding-bottom: 10px;
+}
+
+.right-panel p.summary-desc {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db; 
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    display: flex;
+    gap: 15px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateX(5px);
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.summary-time {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 15px;
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    gap: 3px;
+}
+
+.summary-details strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.summary-phone {
+    color: #7f8c8d;
+    font-size: 12px;
+}
+
+/* Pop-up Modalı */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.55); 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 420px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    animation: fadeIn 0.2s ease-out; 
+}
+
+.time-display {
+    color: #3498db;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #3498db; 
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 25px;
+}
+
+.right-actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-delete {
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: opacity 0.2s;
+    background-color: #e74c3c; 
+    color: white;
+    display: none; 
+}
+
+.btn-cancel {
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: opacity 0.2s;
+    background-color: #95a5a6; 
+    color: white;
+}
+
+.btn-save {
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: opacity 0.2s;
+    background-color: #3498db; 
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}

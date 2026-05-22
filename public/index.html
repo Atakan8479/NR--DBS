@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diş Hekimi Asistan Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <main class="calendar-section">
+            <header class="calendar-header">
+                <div class="header-top">
+                    <h2>NR - Diş Kayıt Sistemi<span id="weekRangeDisplay"></span></h2>
+                    <div class="week-nav">
+                        <button id="prevWeekBtn" class="btn-nav">◀ Önceki Hafta</button>
+                        <button id="todayBtn" class="btn-nav">Bu Hafta</button>
+                        <input type="date" id="weekPicker" class="btn-nav week-picker" title="İstediğiniz bir tarihi seçerek o haftaya gidin">
+                        <button id="nextWeekBtn" class="btn-nav">Sonraki Hafta ▶</button>
+                    </div>
+                </div>
+            </header>
+            <div class="calendar-grid" id="calendarGrid">
+                </div>
+        </main>
+
+        <aside class="right-panel">
+            <h3>Günlük Özet</h3>
+            <p class="summary-desc">Takvimdeki gün başlıklarına tıklayarak detayları görebilirsiniz.</p>
+            <div id="summaryList"></div>
+        </aside>
+    </div>
+
+    <div class="modal-overlay" id="appointmentModal">
+        <div class="modal-content">
+            <h3>Yeni Randevu Kaydı</h3>
+            <p id="modalTimeDisplay" class="time-display"></p>
+            
+            <form id="appointmentForm">
+                <input type="hidden" id="selectedDay">
+                <input type="hidden" id="selectedTime">
+                
+                <div class="form-group">
+                    <label>Ad Soyad:</label>
+                    <input type="text" id="patientName" required>
+                </div>
+                <div class="form-group">
+                    <label>Yapılacak İşlem:</label>
+                    <input type="text" id="procedure" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefon Numarası:</label>
+                    <input type="tel" id="phone" placeholder="5551234567" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label>E-posta (Opsiyonel):</label>
+                    <input type="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label>Notlar (Opsiyonel):</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-delete" id="deleteBtn">Sil</button>
+                    <div class="right-actions">
+                        <button type="button" class="btn-cancel" id="closeModalBtn">İptal</button>
+                        <button type="submit" class="btn-save">Kaydet</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
